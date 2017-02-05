@@ -32,7 +32,6 @@ angular.module('ion-image-search').factory('googleSearch', ['$injector', '$q', '
         query["key"] = googleParams.key;
         query["safe"] = "high";
         query["cx"] = googleParams.customSearch;
-        query["searchType"] = "image";
         query["fileType"] = this.configuration.fileType;
         query["imgSize"] = this.configuration.imgSize;
         query["start"] = startIndex;
@@ -43,7 +42,7 @@ angular.module('ion-image-search').factory('googleSearch', ['$injector', '$q', '
         var retval = [];
         if (data.items && data.items.length>0) {
             data.items.forEach(function (item) {
-                retval.push({url: item.link});
+                retval.push({url: item.pagemap.cse_image[0].src});
             });
         } else{
             $log.warn('returned no images');
